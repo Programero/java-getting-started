@@ -2,7 +2,7 @@ Box b1; //an object reference that can point to an object of type Box
 
 b1 = new Box(); //we created a new object of type Box and b1 holds the reference to it.
 
-**Constructors have the same name as the class.**
+**Constructors have the same name as the class and donot have any return type**
 
 ## **this** keyword
 
