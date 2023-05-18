@@ -49,5 +49,6 @@ public class StackUsage {
         System.out.println(s.pop());
         System.out.println(s.pop());
         s.pop();
+        s.pop();
     }
 }

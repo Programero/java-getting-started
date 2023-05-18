@@ -2,7 +2,7 @@ class Arrays {
     public static void main(String args[]) {
         // one dimensional array
         int size = 5;
-        int arr[] = new int[size];
+        int arr[] = new int[size]; // by default arr values will be initialized with zeroes
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }

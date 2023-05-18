@@ -28,7 +28,8 @@ When objects of a class are declared, no copy of a static variable is made. All 
 
 - Both methods and variables can be declared as static.
 
-Static variables and methods are attached to class and not instances of the class.
+- To use static variables: ClassName.staticvar or obj.staticvar
+- To use static methods: Classname.staticmethod() or obj.staticmethod()
 
 Methods declared as **static** have several restrictions:
 
@@ -52,9 +53,9 @@ static int b;
 
 }
 
-## final class members (constants)
+## **final** class variables (constants)
 
-**final** prevents its contents from being modified.
+**final** prevents the contents of a variable from being modified.
 
 We can initialize **final** variables in just exactly two ways:
 
@@ -66,6 +67,8 @@ In addition to class variables, both method parameters and local variables can b
 **Convention**: we declare **final** fields in all capital letters.
 
 For example final int FILE_NEW = 1;
+
+**Note**: We can also have methods of a class being marked as final to prevent it from being overridden in the subclass. And we can also mark a class as final to prevent it from being inherited. (discussed in inheritance chapter)
 
 ## Nested/Inner classes
 
