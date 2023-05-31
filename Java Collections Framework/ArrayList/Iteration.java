@@ -23,10 +23,14 @@ public class Iteration {
         itr = list.iterator();
 
         while (itr.hasNext()) {
-            int next = itr.next();
-            if (next == 20) {
+            if (itr.next() == 20) {
                 itr.remove();
             }
+
+            // list.add(60);
+            // Note that while iterating using iterator we cannot do list.add(E e) or
+            // list.set(int index, E e), that will throw a
+            // java.util.ConcurrentModificationException exception
         }
 
         System.out.println(list);

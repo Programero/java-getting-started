@@ -56,7 +56,10 @@ There are three ways to create an **ArrayList:**
 
 - Removing an Element at a particular index: **remove(int index)**
 - Removing a particular element from the ArrayList: **remove(Object e)** Element e will be searched from the beginning and the first occurence will be removed.
-- Removing all the elements within a range: **removeRange(int fromIndex, int toIndex)** remove all the elements whose index is between fromIndex, inclusive, and toIndex, exclusive. Note: removeRange has protected access inside ArrayList class, therefore we cannot use it directly. Kindly check Examples.java to see how we use removeRange method.
+- Removing all the elements within a range: **removeRange(int fromIndex, int toIndex)** remove all the elements whose index is between fromIndex, inclusive, and toIndex, exclusive.
+
+  **Note:** removeRange has protected access inside ArrayList class, therefore we cannot use it directly. Kindly check Examples.java to see how we use removeRange method.
+
 - Removing all the elements within a given Collection: **removeAll(Collection c)** remove, from the given list, all of the elements that are contained in the specified collection c.
 - Empty an ArrayList: **clear()** remove all the elements from the ArrayList.
 
@@ -94,6 +97,8 @@ Let's discuss how an ArrayList can be iterated.
 
   }
 
+- Using forEach loop
+
   for (Integer i : list) { //using forEach loop
 
       System.out.println(i);
@@ -110,11 +115,11 @@ Let's discuss how an ArrayList can be iterated.
 
   2. **_next()_** - returns the next element in the list. Before calling next(), we should always call hasNext() to verify that there is an element; otherwise, NoSuchElementException will be thrown.
 
-  3. **_remove()_** - This method removes the last element returned by the iterator. It can be called only once per call to the **_next()_**.
+  3. **_remove()_** - This method removes the last element returned by the iterator using itr.next(). It can be called only once per call to the **_next()_**.
 
   4. **_forEachRemaining(Consumer<? super E> action)_** - This method was introduced in Java 8. It performs the given action for each remaining element until all elements have been processed or the action throws an exception.
 
-**Note:** Once an Iterator has been created (List< type T> itr = list.iterator()) , then we should not add/remove any element from the list using list.add/list.remove , doing so will throw **ConcurrentModificationException**. Mind that we can still use itr.remove()
+**Note:** Once an Iterator has been created (List< type T> itr = list.iterator()) , then we should not add/update/remove any element from the list using list.add/list.remove/list.set , doing so will throw **ConcurrentModificationException**. Mind that we can still use itr.remove() on the iterator object.
 
 Syntax: Check **Iteration.java**
 
@@ -124,7 +129,7 @@ Syntax: Check **Iteration.java**
 
 **Why ListIterator?**
 
-The Iterator provides very limited capabilities as we can iterate only in the forward direction and we can’t update or insert an element to the list while iterating. To overcome these problems, we can use **ListIterator**.
+The Iterator provides very limited capabilities as we can iterate only in the forward direction and we can’t update or insert an element to the list while iterating, we can only remove an element from the list using iterator object while iterating. To overcome these problems, we can use **ListIterator**.
 
 The **listIterator()** method returns an object of type **ListIterator** which can then be used to iterate the ArrayList.
 
@@ -146,7 +151,11 @@ Below are the methods that are available in the **ListIterator** Interface:
 
 8. **set(E e)** - This method removes the last element that was returned by next() or previous() from the list. This call can only be made once per call to next() or previous(). It can be made only if add() has not been called after the last call to next() or previous().
 
-9. **add(E e)** - This method inserts the specified element into the list. The element is inserted immediately before the element that would be returned by next(), if any, and after the element that would be returned by previous(), if any.
+   **Note**: ListIterator obj allows to update an element in the list while iterating. Iterator object doesn't allows you to do so. Iterator obj only allows you to remove an element from the list while iterating.
+
+9. **add(E e)** - This method inserts the specified element into the list. The element is inserted immediately before the element that would be returned by next(), if any, and after the element that would be returned by previous(), if any. The new element is inserted before the implicit cursor: a subsequent call to next would be unaffected, and a subsequent call to previous would return the new element. (This call increases by one the value that would be returned by a call to nextIndex or previousIndex.)
+
+   **Note**: ListIterator obj allows to add an element to the list while iterating. Iterator object doesn't allows you to do so. Iterator obj only allows you to remove an element from the list while iterating.
 
 Syntax and code: Please check **IterationUsingListIterator.java**
 
@@ -204,13 +213,41 @@ Collections.sort() method sorts the given List in ascending order. But the quest
 Each wrapper class(Integer, Double, or Long), String class, and Date class implements an interface called Comparable. This interface contains a compareTo(T obj) method which is used by Collections.sort method to sort the Collection. This method returns a negative integer, zero, or a positive integer if this object is less than, equal to, or greater than the object passed as an argument.
 
 ```
-If we use the Collections.sort(List<T> list) method to sort an ArrayList, then the class whose objects are stored in the ArrayList must implement the Comparable interface. If the ArrayList stores an Integer, a Long, or a String, then we don’t need to worry as these classes already implement the Comparable interface. But if the ArrayList stores a custom class object, then that class must implement the Comparable interface.
+If we use the Collections.sort(List<T> list) method to sort an ArrayList, then the class whose objects are stored in the ArrayList must implement the Comparable interface. If the ArrayList stores an Integer, a Long, or a String, then we don’t need to worry as these classes already implement the Comparable interface. But if the ArrayList stores a custom class object, then that class must implement the Comparable interface and implement compareTo(T t2).
+
+compareTo method is used in following manner, t1.compareTo(t2) that returns:
+
+-1 if the t1 should come before t2
+1 if the t2 should come before t1
+0 if the t1 and t2 are equal
 ```
 
 **Example:**
 
 Let's say we have an Employee class objects with Name, Age.
 
-Now if we want to sort the List of Employee class objects by Name using Collections.sort, then our Employee class should implement the Comparable interface and should override the compareTo(T t2) method.
+Now if we want to sort the List of Employee class objects by Age using Collections.sort, then our Employee class should implement the Comparable interface and should override the compareTo(T t2) method.
 
 Check **ComparableInterfaceDemo.java** file.
+
+---
+
+## Understanding Comparator Interface
+
+One of the major drawbacks of using a Comparable interface is that the comparing logic gets fixed. For example, in the previous Employee class, we sorted using age, that depends only on the implementation of the compareTo() method and later we cannot sort using Name.
+
+The Comparator interface has a method, compare(T o1, T o2), which takes two objects, o1 and o2 as parameters. It returns -1 if o1
+< o2, 1 if o1 > o2 and 0 if o1 is equal to o2.
+
+There are two ways in which Comparator Interface can be used to define sorting sequence:
+
+- Using List.Sort(Comparator< T > obj)
+- Using Collections.Sort(List< T > list, Comparator< T > obj)
+
+Example: In CompratorInterfaceDemo, we again use the same Employee Class, but this time we define two different comparators, one to sort with age, other one to sort with name.
+
+Syntax and Code: **ComparatorInterfaceDemo.java**
+
+---
+
+### Also check out the exercise code in **ArrayListExercise.java**
