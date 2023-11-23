@@ -4,6 +4,21 @@
 <beans>
     <bean id="triangle" class="com.kapil.spring.Triangle">
 <!--        <property name="type" value="EQUILATERAL" />-->
-        <constructor-arg value="EQUILATERAL" type="String"/>
+<!--        <constructor-arg value="EQUILATERAL" type="String"/>-->
+        <property name="point1" ref="pointA"/>
+        <property name="point2" ref="pointB"/>
+        <property name="point3" ref="pointC"/>
+    </bean>
+    <bean id="pointA" class="com.kapil.spring.Point">
+        <property name="x" value="0.0"/>
+        <property name="y" value="20.0"/>
+    </bean>
+    <bean id="pointB" class="com.kapil.spring.Point">
+        <property name="x" value="20.0"/>
+        <property name="y" value="20.0"/>
+    </bean>
+    <bean id="pointC" class="com.kapil.spring.Point">
+        <property name="x" value="20.0"/>
+        <property name="y" value="0.0"/>
     </bean>
 </beans>
