@@ -1,8 +1,12 @@
 package com.kapil.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
-public class Triangle{
+@Component
+public class Triangle implements Shape{
 //    private String type;
 //
 //    public Triangle(String type){
@@ -39,6 +43,7 @@ public class Triangle{
 //        this.point3 = point3;
 //    }
 
+    @Autowired
     private List<Point> points;
 
     public List<Point> getPoints() {
