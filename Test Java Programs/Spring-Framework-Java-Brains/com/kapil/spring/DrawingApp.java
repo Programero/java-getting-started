@@ -2,15 +2,13 @@ package com.kapil.spring;
 
 //import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 @ComponentScan
-//@Configuration
+@Configuration
+@EnableAspectJAutoProxy
 public class DrawingApp {
     public static void main(String[] args) {
         //We would now don't initialize the Triangle directly, rather depend upon BeanFactory to create initialize and manage the Triangle class objects
@@ -19,7 +17,11 @@ public class DrawingApp {
         //ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         ApplicationContext context = new AnnotationConfigApplicationContext(DrawingApp.class);
         Shape shape = (Shape) context.getBean("circle");
-        shape.draw();
+        try {
+            shape.draw();
+        } catch(Exception ex){
+            System.out.println(ex);
+        }
         for (String beanName : context.getBeanDefinitionNames()) {
             System.out.println(beanName);
         }
