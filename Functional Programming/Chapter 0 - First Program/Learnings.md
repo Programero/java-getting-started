@@ -1,3 +1,3 @@
-- The name of the main class should match the name of the file that holds the program.
+- The name of the main public class should match the name of the file that holds the program.
 - **javac nameOfTheClass.java** : This will compile the java code and generate a file with .class extension (nameOfTheClass.class) that contains the bytecode.
 - **java nameOfTheClass** : To run the bytecode.
