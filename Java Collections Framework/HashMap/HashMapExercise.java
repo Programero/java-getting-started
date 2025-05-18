@@ -53,7 +53,7 @@ public class HashMapExercise {
         while (itr.hasNext()) {
             Entry<String, Integer> entry = itr.next();
             if (entry.getValue() < 50) {
-                itr.remove();
+                itr.remove(); // Removing an Entry from the EntrySet, removes the Entry from the HashMap as well.
             }
         }
         System.out.println("Stock Prices after removing all the companies with stock price < 50: " + stockPrice);

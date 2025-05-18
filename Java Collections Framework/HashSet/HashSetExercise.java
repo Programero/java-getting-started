@@ -1,3 +1,4 @@
+
 import java.util.HashSet;
 
 public class HashSetExercise {
@@ -12,5 +13,7 @@ public class HashSetExercise {
             }
             set.add(i);
         }
+
+        System.out.println("Unique Elements in the set, with random order: " + set);
     }
 }

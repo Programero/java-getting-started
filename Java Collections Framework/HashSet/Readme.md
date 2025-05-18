@@ -7,7 +7,7 @@ HashSet is a class in the java.utils package which implements the Set interface
 - HashSet does not allow duplicate elements.
 - HashSet allows only one null element.
 - The elements are inserted in random order in a HashSet.
-- A HashSet is internally backed by a HashMap.
+- A HashSet internally stores the elements using HashMap.
 
 ### Creating a HashSet
 
@@ -88,4 +88,51 @@ Syntax and Code: **HashSetExercise.java**
 
 ---
 
-## Note: The elements in HashSet are stored in Random order. HashSet allows one null element. HashSet is implemented using a HashMap.
+**Note:** The elements in HashSet are stored in Random order. HashSet allows one null element. HashSet is implemented using a HashMap.
+
+### How HashSet uses HashMap internally?
+
+A HashSet stores elements as keys in a HashMap, and uses a constant dummy object (PRESENT) as the value.
+
+Source Code from OpenJDK
+
+```java
+public class HashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, java.io.Serializable {
+    
+    private transient HashMap<E, Object> map;
+
+    // Dummy value to associate with an Object in the map
+    private static final Object PRESENT = new Object();
+
+    public HashSet() {
+        map = new HashMap<>();
+    }
+
+    public boolean add(E e) {
+        return map.put(e, PRESENT) == null;
+    }
+
+    public boolean remove(Object o) {
+        return map.remove(o) == PRESENT;
+    }
+
+    public boolean contains(Object o) {
+        return map.containsKey(o);
+    }
+
+    public void clear() {
+        map.clear();
+    }
+
+    public int size() {
+        return map.size();
+    }
+
+    public Iterator<E> iterator() {
+        return map.keySet().iterator();
+    }
+}
+```
+
+
+

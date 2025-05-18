@@ -73,7 +73,7 @@ When we're calling the iterator() method on the CopyOnWriteArrayList, we get bac
 
 - The iterator returned by CopyOnWriteArrayList.iterator/CopyOnWriteArrayList.listIterator cannot be used to remove/add/set elements, because they iterate on an IMMUTABLE SNAPSHOT of the content of the CopyOnWriteArrayList and not on the originalArray. But we can do list.add/list.remove/list.set and no ConcurrentModificationException would be thrown, as write will happen on a new copy of originalArray.
 
-**NOTE:** A CopyOnWriteArrayList is preferrable incase when we want to do more Read operations and less Write operations, because concurrent Read Operations are possible on CopyOnWriteArrayList, but a write operation(add/remove/update) requires creating a new copy of the originalArrayList and then doing modifications on the same.
+**NOTE:** A CopyOnWriteArrayList is preferrable incase when we want to do more Read operations and less Write operations, because concurrent Read Operations are possible on CopyOnWriteArrayList, but a write operation(add/remove/update) requires acquiring the lock, creating a new copy of the originalArrayList and then doing modifications on the same.
 
 ```
 import java.util.Iterator;
@@ -126,4 +126,34 @@ Check code: **CopyOnWriteArrayListExamples.java**
 
 ---
 
-**NOTE:** A very good read on CopyOnWriteArrayList v/s SynchronizedArrayList: https://www.geeksforgeeks.org/difference-between-synchronized-arraylist-and-copyonwritearraylist-in-java-collection/
+Do read about [Collections.synchronizedList](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#synchronizedList-java.util.List-) method, Returns a synchronized (thread-safe) list in which all the operations like add, get, insert, remove... are synchronized.
+
+**NOTE:** Even though operations like add() or get() are synchronized, iteration is not automatically thread-safe. You must synchronize manually while iterating:
+
+```java
+List<String> al = new ArrayList<String>();
+
+al.add("Geeks");
+al.add("for");
+al.add("Geeks");
+al.add("Computer");
+al.add("Science");
+al.add("Portal");
+
+List<String> sal = Collections.synchonizedList(al);
+
+
+synchronized (sal) {
+    for (String item : sal) {
+        // Safe iteration
+    }
+}
+```
+
+The main difference between synchronized ArrayList and CopyOnWriteArrayList is that:
+
+The whole ArrayList is locked by Synchronized Arraylist for thread safety during both read and write operations.
+
+ArrayList is locked by CopyOnWriteArrayList for thread safety, only during the write operations.
+
+

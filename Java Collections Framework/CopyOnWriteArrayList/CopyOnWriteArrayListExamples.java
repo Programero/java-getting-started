@@ -22,7 +22,6 @@ public class CopyOnWriteArrayListExamples {
 
         while (itr.hasNext()) {
             System.out.println(itr.next());
-
         }
 
     }

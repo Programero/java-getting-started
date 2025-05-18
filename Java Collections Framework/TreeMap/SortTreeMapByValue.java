@@ -13,6 +13,9 @@ public class SortTreeMapByValue {
         stockPrice.put("Novartis", 43);
         stockPrice.put("TCS", 23);
 
+        // Print the original TreeMap
+        System.out.println("Original stockPrices, sorted by key: " + stockPrice);
+
         // Get the EntrySet and store it in a TreeSet with custom comparator on Values
         TreeSet<Entry<String, Integer>> sortedStockPrices = new TreeSet<Entry<String, Integer>>(
                 (es1, es2) -> es1.getValue() - es2.getValue());

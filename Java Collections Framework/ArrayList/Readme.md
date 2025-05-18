@@ -18,7 +18,7 @@ An **ArrayList** stores data in a resizable array.
 
 ## Time complexities:
 
-- **Adding an Element**: Best Case O(1) , WorstCase O(n)
+- **Adding an Element**: WorstCase O(n), Best Case O(1) (When inserted at the beginning or at the end)
 - **Removing an Element**: O(n)
 
   There are two ways to remove an element from ArrayList:
@@ -105,6 +105,8 @@ Let's discuss how an ArrayList can be iterated.
 
   }
 
+  The forEach loop in Java depends on the ```Iterable``` interface implementation by the collection.
+
 - Using Iterator
 
   The iterator() method in ArrayList returns an **Iterator** type object.
@@ -119,13 +121,15 @@ Let's discuss how an ArrayList can be iterated.
 
   4. **_forEachRemaining(Consumer<? super E> action)_** - This method was introduced in Java 8. It performs the given action for each remaining element until all elements have been processed or the action throws an exception.
 
-**Note:** Once an Iterator has been created (List< type T> itr = list.iterator()) , then we should not add/update/remove any element from the list using list.add/list.remove/list.set , doing so will throw **ConcurrentModificationException**. Mind that we can still use itr.remove() on the iterator object.
+**Note:** Once an Iterator has been created (Iterator<type T> itr = list.iterator()) , then we should not add/update/remove any element from the list using list.add/list.remove/list.set , doing so will throw **ConcurrentModificationException**. Mind that we can still use itr.remove() on the iterator object.
 
 Syntax: Check **Iteration.java**
 
 ---
 
 ## ArrayList: Iteration using ListIterator
+
+Follows Iterator design pattern: https://refactoring.guru/design-patterns/iterator
 
 **Why ListIterator?**
 
@@ -149,7 +153,7 @@ Below are the methods that are available in the **ListIterator** Interface:
 
 7. **remove()** - This method removes the last element that was returned by next() or previous() from the list. This call can only be made once per call to next() or previous(). It can be made only if add() has not been called after the last call to next() or previous().
 
-8. **set(E e)** - This method removes the last element that was returned by next() or previous() from the list. This call can only be made once per call to next() or previous(). It can be made only if add() has not been called after the last call to next() or previous().
+8. **set(E e)** - This method updates the last element that was returned by next() or previous() from the list. This call can only be made once per call to next() or previous(). It can be made only if add() has not been called after the last call to next() or previous().
 
    **Note**: ListIterator obj allows to update an element in the list while iterating. Iterator object doesn't allows you to do so. Iterator obj only allows you to remove an element from the list while iterating.
 
@@ -172,13 +176,15 @@ There are two ways of sorting an ArrayList:
 
 ### 1. Using **Collections.sort(List<T> list)** method
 
-Collections class in java.util package defines a public staic method for sorting:
+```Collections``` class in java.util package defines public staic method to perform certain operations on collection for sorting, searching, reversing.. etc. Right now, we look at one such helpful static method exposed by ```Collections``` class, ```sort(List<T> list)```
 
 ```
 public static void sort(List<T> myList)
 ```
 
-This method can be used to sort a list in ascending order.
+This method can be used to sort a list in ascending order, as per the implementation of compareTo function by the elements class(T) which should implement the ```Comparable``` interface.
+
+or we can also use ```sort(List<T> list, Comparator<? super T> c)``` method from Collections class, which sorts the specified list according to the order induced by the specified comparator.
 
 **Syntax/Code:** Check **SortingWithCollections.java**
 
@@ -210,8 +216,7 @@ Syntax and Code: Check **Sorting.java**
 
 Collections.sort() method sorts the given List in ascending order. But the question is, how does the sort() method decide which element is smaller and which one is larger?
 
-Each wrapper class(Integer, Double, or Long), String class, and Date class implements an interface called Comparable. This interface contains a compareTo(T obj) method which is used by Collections.sort method to sort the Collection. This method returns a negative integer, zero, or a positive integer if this object is less than, equal to, or greater than the object passed as an argument.
-
+Each wrapper class(Integer, Double, or Long), String class, and Date class implements an interface called ```Comparable```. This interface contains a ```compareTo(T obj)``` method which is used by ```Collections.sort``` method to sort the Collection. This method returns a negative integer, zero, or a positive integer if this object is less than, equal to, or greater than the object passed as an argument.
 ```
 If we use the Collections.sort(List<T> list) method to sort an ArrayList, then the class whose objects are stored in the ArrayList must implement the Comparable interface. If the ArrayList stores an Integer, a Long, or a String, then we don’t need to worry as these classes already implement the Comparable interface. But if the ArrayList stores a custom class object, then that class must implement the Comparable interface and implement compareTo(T t2).
 
@@ -234,9 +239,9 @@ Check **ComparableInterfaceDemo.java** file.
 
 ## Understanding Comparator Interface
 
-One of the major drawbacks of using a Comparable interface is that the comparing logic gets fixed. For example, in the previous Employee class, we sorted using age, that depends only on the implementation of the compareTo() method and later we cannot sort using Name.
+One of the major drawbacks of using a ```Comparable``` interface is that the comparing logic gets fixed. For example, in the previous Employee class, we sorted using age, that depends only on the implementation of the ```compareTo()``` method and later we cannot sort using Name.
 
-The Comparator interface has a method, compare(T o1, T o2), which takes two objects, o1 and o2 as parameters. It returns -1 if o1
+The ```Comparator``` interface has a method, ```compare(T o1, T o2)```, which takes two objects, o1 and o2 as parameters. It returns -1 if o1
 < o2, 1 if o1 > o2 and 0 if o1 is equal to o2.
 
 There are two ways in which Comparator Interface can be used to define sorting sequence:

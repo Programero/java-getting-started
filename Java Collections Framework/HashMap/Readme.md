@@ -2,7 +2,7 @@
 
 ## Introduction
 
-HashMap implements the Map interface. It is used to store the key-value pairs.
+HashMap extends AbstractMap class which inturn implements the Map interface. It is used to store the key-value pairs.
 
 - The keys should be unique.
 - HashMap allows only one null key.
@@ -103,7 +103,7 @@ static class Node<K,V> implements Map.Entry<K,V> {
 ...some more code
 ```
 
-This class has a key and a value field. It also has a next field that is used to point to the next Node.
+This class has a key and a value field. It also has a next field that is used to point to the next Node similar to LinkedList nested static Node class.
 
 ## Creating a HashMap
 
