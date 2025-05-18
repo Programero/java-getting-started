@@ -43,11 +43,11 @@ final transient ReentrantLock lock = new ReentrantLock();
 
 ### **Write Operation on a CopyOnWriteArrayList**
 
-When a new element is to added/removed/updated in a CopyOnWriteArrayList then the following procedure takes place:
+When a new element is to added/removed/updated(set) in a CopyOnWriteArrayList then the following procedure takes place:
 
 - The thread that is adding the element acquires a lock on the lock object using the lock.lock() method. If some other thread tries to add an element to the list, then it will not get access.
 
-- The thread that has acquired the lock will then make the copy of the originalArray.
+- The thread that has acquired the lock will then make the copy of the originalArray. (that is why this collection is called CopyOnWrite)
 
 ```
 Object[] newElements = Arrays.copyOf(elements, len + 1);
@@ -72,6 +72,8 @@ When we're calling the iterator() method on the CopyOnWriteArrayList, we get bac
 - CopyOnWriteArrayList.iterator() simply provides an iterator that iterates over an IMMUTABLE SNAPSHOT of the content of the CopyOnWriteArrayList.
 
 - The iterator returned by CopyOnWriteArrayList.iterator/CopyOnWriteArrayList.listIterator cannot be used to remove/add/set elements, because they iterate on an IMMUTABLE SNAPSHOT of the content of the CopyOnWriteArrayList and not on the originalArray. But we can do list.add/list.remove/list.set and no ConcurrentModificationException would be thrown, as write will happen on a new copy of originalArray.
+
+- ```get(int index)``` happens on the originalArray without any lock being acquired.
 
 **NOTE:** A CopyOnWriteArrayList is preferrable incase when we want to do more Read operations and less Write operations, because concurrent Read Operations are possible on CopyOnWriteArrayList, but a write operation(add/remove/update) requires acquiring the lock, creating a new copy of the originalArrayList and then doing modifications on the same.
 
@@ -126,9 +128,9 @@ Check code: **CopyOnWriteArrayListExamples.java**
 
 ---
 
-Do read about [Collections.synchronizedList](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#synchronizedList-java.util.List-) method, Returns a synchronized (thread-safe) list in which all the operations like add, get, insert, remove... are synchronized.
+Do read about [Collections.synchronizedList](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#synchronizedList-java.util.List-) method, Returns a synchronized (thread-safe) list in which all the operations like add, get, insert, remove... are synchronized on 'this'.
 
-**NOTE:** Even though operations like add() or get() are synchronized, iteration is not automatically thread-safe. You must synchronize manually while iterating:
+**NOTE:** Even though operations like add() or get() are synchronized, iteration is not automatically thread-safe. You must synchronize manually before iterating:
 
 ```java
 List<String> al = new ArrayList<String>();
