@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.Set;
 
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ExecutorService;

@@ -9,4 +9,6 @@ A Set that uses an internal CopyOnWriteArrayList for all of its operations.  Thu
 - Iterators do not support the mutative <tt>remove</tt> operation.
 - Traversal via iterators is fast and cannot encounter interference from other threads. Iterators rely on unchanging snapshots of the array at the time the iterators were constructed.
 
-**Note:** To better comprehend CopyOnWriteArraySet, first read about CopyOnWriteArrayList 
+**Note:** To better comprehend CopyOnWriteArraySet, first read about CopyOnWriteArrayList
+
+Code ref: [OpenJDK Github repo](https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/concurrent/CopyOnWriteArraySet.java)

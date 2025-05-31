@@ -45,7 +45,7 @@ final transient ReentrantLock lock = new ReentrantLock();
 
 When a new element is to added/removed/updated(set) in a CopyOnWriteArrayList then the following procedure takes place:
 
-- The thread that is adding the element acquires a lock on the lock object using the lock.lock() method. If some other thread tries to add an element to the list, then it will not get access.
+- The thread that is adding the element acquires a lock on the lock object using the lock.lock() method. If some other thread tries to add an element to the list, then it will not get access and will have to wait on Reentrant lock, whereas Get operations are free.
 
 - The thread that has acquired the lock will then make the copy of the originalArray. (that is why this collection is called CopyOnWrite)
 
@@ -75,7 +75,7 @@ When we're calling the iterator() method on the CopyOnWriteArrayList, we get bac
 
 - ```get(int index)``` happens on the originalArray without any lock being acquired.
 
-**NOTE:** A CopyOnWriteArrayList is preferrable incase when we want to do more Read operations and less Write operations, because concurrent Read Operations are possible on CopyOnWriteArrayList, but a write operation(add/remove/update) requires acquiring the lock, creating a new copy of the originalArrayList and then doing modifications on the same.
+**NOTE:** A CopyOnWriteArrayList is preferrable incase when we want to do more Read operations and less Write operations, because concurrent Read Operations are possible on CopyOnWriteArrayList, but a write operation(add/remove/update) requires acquiring the lock, creating a new copy of the originalArrayList and then doing modifications on the same which is a costly operation.
 
 ```
 import java.util.Iterator;
@@ -158,4 +158,4 @@ The whole ArrayList is locked by Synchronized Arraylist for thread safety during
 
 ArrayList is locked by CopyOnWriteArrayList for thread safety, only during the write operations.
 
-
+Code ref: [OpenJDK Github repo](https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java)

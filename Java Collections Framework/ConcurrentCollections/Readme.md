@@ -8,7 +8,7 @@ ThreadSafe collections
 
 ### Set
 - Collections.SynchronizedSet
-- ConcurrentSkipListSet
+- ConcurrentSkipListSet (utilises ConcurrentSkipListMap keys)
 - CopyOnWriteArraySet
 - Custom implementation of Set via ConcurrentHashMap keys
 
