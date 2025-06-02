@@ -2,6 +2,21 @@
 
 ArrayBlockingQueue is a bounded, blocking, FIFO queue backed by an array. 
 
+Implements BlockingQueue interface which provides extra methods put and take, which are blocking versions of offer and put, waits on Condition variables notEmpty or notFull incase of take() and put(E e) respectively.
+
+### Summary of BlockingQueue methods
+
+|               | Throws exception | Special value | Blocks     | Times out                 |
+|---------------|------------------|----------------|------------|---------------------------|
+| **Insert**    | `add(e)`         | `offer(e)`     | `put(e)`   | `offer(e, time, unit)`    |
+| **Remove**    | `remove()`       | `poll()`       | `take()`   | `poll(time, unit)`        |
+| **Examine**   | `element()`      | `peek()`       | *not applicable* | *not applicable*  |
+
+
+Similarly LinkedBlockingQueue, PriorityBlockingQueue implements BlockingQueue interface.
+
+Similarly LinkedBlockingDeque implements BlockingDeque interface.
+
 | Feature         | Description                       |
 | --------------- | --------------------------------- |
 | Type            | Bounded, Blocking Queue           |

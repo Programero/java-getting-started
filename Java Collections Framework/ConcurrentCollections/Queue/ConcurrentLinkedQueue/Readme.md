@@ -12,7 +12,7 @@ ConcurrentLinkedQueue is a thread-safe, non-blocking, FIFO (First-In-First-Out) 
 | Null elements     | ❌ Not allowed                                        |
 | Iteration         | Weakly consistent                                    |
 
-###Thread Safety
+### Thread Safety
 
 Operations use atomic CAS loops — no locks used.
 Good Read: https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf

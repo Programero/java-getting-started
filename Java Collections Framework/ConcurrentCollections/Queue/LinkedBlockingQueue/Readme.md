@@ -6,6 +6,8 @@
 
 LinkedBlockingQueue is a thread-safe, blocking, FIFO queue based on a linked-node structure.
 
+Implements ``BlockingQueue`` interface.
+
 | Feature           | Description                                                    |
 | ----------------- | -------------------------------------------------------------- |
 | Type              | Blocking Queue                             |

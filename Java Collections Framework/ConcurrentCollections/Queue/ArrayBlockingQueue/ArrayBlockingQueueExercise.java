@@ -5,16 +5,17 @@ import java.util.concurrent.TimeUnit;
 
 public class ArrayBlockingQueueExercise {
     public static void main(String[] args) {
-        // Create an ArrayBlockingQueue with a capacity of 5
+        // Create an ArrayBlockingQueue with a capacity of 100
         ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(100);
 
-        // Fill the queue to its capacity using three threads in parallel
+        // Fill the queue to its capacity using 2 threads in parallel, while consuming the elements from a separate thread
         ExecutorService executor = Executors.newFixedThreadPool(3);
 
         // take elements from the queue using a single thread
         executor.submit(() -> {
             for (int i = 0; i < 100; i++) {
                 try {
+                    System.out.println("Trying to consume: " + i);
                     Integer value = queue.take(); // Blocks if the queue is empty on Condition variable notEmpty
                     System.out.println("Consumed: " + value);
                 } catch (InterruptedException e) {
@@ -26,6 +27,7 @@ public class ArrayBlockingQueueExercise {
         executor.submit(() -> {
             for (int i = 0; i < 50; i++) {
                 try {
+                    System.out.println("Trying to produce: " + i);
                     queue.put(i); // Blocks if the queue is full on Condition variable notFull
                     System.out.println("Produced: " + i);
                 } catch (InterruptedException e) {
@@ -37,6 +39,7 @@ public class ArrayBlockingQueueExercise {
         executor.submit(() -> {
             for (int i = 50; i < 100; i++) {
                 try {
+                    System.out.println("Trying to produce: " + i);
                     queue.put(i); // Blocks if the queue is full
                     System.out.println("Produced: " + i);
                 } catch (InterruptedException e) {
