@@ -38,7 +38,7 @@ Implements ``BlockingQueue`` interface.
 ### Key Operations
 
 #### ✅ `put(E e)`
-- Waits if the queue is full. (wait notFull)
+- Waits if the queue is full. (wait notFull) (wait on notFull only if the LinkedBlockingQueue has specified the capacity using LinkedBlockingQueue(int capacity) else we have an unbounded queue, so no blocking)
 - Acquires `putLock`.
 - Adds new node at the tail.
 - Increments size counter.
@@ -52,8 +52,8 @@ Implements ``BlockingQueue`` interface.
 - Signals `notFull`.
 
 #### ✅ `offer(E e)`
-- Fails immediately if queue is full.
 - Non-blocking version of `put()`.
+- Returns false if queue is full, otherwise retunrs true if successful.
 
 #### ✅ `poll()`
 - Returns head element or `null` if empty.

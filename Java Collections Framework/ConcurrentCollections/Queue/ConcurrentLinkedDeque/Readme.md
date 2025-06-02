@@ -23,17 +23,17 @@ head and tail pointers are used for efficient addition/removal from both ends.
 
 | Method          | Description                                                 |
 | --------------- | ----------------------------------------------------------- |
-| `addFirst(e)`   | Inserts at the front                                        |
-| `addLast(e)`    | Inserts at the end                                          |
-| `offerFirst(e)` | Like `addFirst` but returns false on failure (non-throwing) |
-| `offerLast(e)`  | Like `addLast` but non-throwing                             |
+| `addFirst(e)`   | Inserts at the front, As the deque is unbounded, this method will never throw IllegalStateException.                                        |
+| `addLast(e)`    | Inserts at the end, As the deque is unbounded, this method will never throw IllegalStateException.                                          |
+| `offerFirst(e)` | Just like `addFirst`. As the deque is unbounded, this method will never return false.|
+| `offerLast(e)`  | Just like `addLast`. As the deque is unbounded, this method will never return false.                              |
 
 | Method          | Description                             |
 | --------------- | --------------------------------------- |
-| `pollFirst()`   | Retrieves and removes first element     |
-| `pollLast()`    | Retrieves and removes last element      |
-| `removeFirst()` | Same as `pollFirst` but throws if empty |
-| `removeLast()`  | Same as `pollLast` but throws if empty  |
+| `pollFirst()`   | Retrieves and removes first element, returns null if this deque is empty.     |
+| `pollLast()`    | Retrieves and removes last element, returns null if this deque is empty.      |
+| `removeFirst()` | Same as `pollFirst` but throws NoSuchElementException if empty |
+| `removeLast()`  | Same as `pollLast` but throws NoSuchElementException if empty  |
 
 | Method        | Description                     |
 | ------------- | ------------------------------- |

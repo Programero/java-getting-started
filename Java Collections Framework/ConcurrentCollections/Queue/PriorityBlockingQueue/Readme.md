@@ -32,7 +32,7 @@ PriorityBlockingQueue is a concurrent, unbounded, blocking queue that orders ele
 - Acquires the reentrant lock
 
 #### ✅ `take()`
-- Blocks if the queue is empty.
+- Blocks if the queue is empty. (wait on notEmpty condition variable)
 - Removes and returns the element with highest priority (smallest according to `compareTo()`).
 - Acquires the reentrant lock
 
