@@ -1,6 +1,6 @@
 ## Getting started with Java
 
-The purpose of this file is to take notes of the learnings from the book: Java - The Complete Reference (Herbert Schildt)
+The purpose of this file is to take notes of the learnings from the book: Java - The Complete Reference (Herbert Schildt) and from other online sources
 
 ## JVM
 
