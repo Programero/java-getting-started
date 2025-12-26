@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context = "http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd
+      http://www.springframework.org/schema/aop
+      https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    <bean id="triangle" class="com.kapil.spring.Triangle">-->
+<!--        <property name="type" value="EQUILATERAL" />-->
+<!--        <constructor-arg value="EQUILATERAL" type="String"/>-->
+<!--        <property name="point1" ref="pointA"/>-->
+<!--        <property name="point2" ref="pointB"/>-->
+<!--        <property name="point3" ref="pointC"/>-->
+<!--        <property name="points">-->
+<!--            <list>-->
+<!--                <ref bean="pointA"/>-->
+<!--                <ref bean="pointB"/>-->
+<!--                <ref bean="pointC"/>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    <bean id="pointA" class="com.kapil.spring.Point">-->
+<!--        <property name="x" value="0.0"/>-->
+<!--        <property name="y" value="20.0"/>-->
+<!--    </bean>-->
+<!--    <bean id="pointB" class="com.kapil.spring.Point">-->
+<!--        <property name="x" value="20.0"/>-->
+<!--        <property name="y" value="20.0"/>-->
+<!--    </bean>-->
+<!--    <bean id="pointC" class="com.kapil.spring.Point">-->
+<!--        <property name="x" value="20.0"/>-->
+<!--        <property name="y" value="0.0"/>-->
+<!--    </bean>-->
+<!--    <bean id="circle" class="com.kapil.spring.Circle">-->
+<!--        <property name="center" ref="pointC"/>-->
+<!--    </bean>-->
+<!--    To support the annotations  -->
+    <context:annotation-config/>
+
+<!--    To tell Spring to scan all the classes in package com.kapil.spring and all its subpackages for components-->
+    <context:component-scan base-package="com.kapil.spring" />
+
+    <aop:aspectj-autoproxy/>
+</beans>
